@@ -86,7 +86,7 @@ The folder where you will save archives. Relative path to the root folder.
 Optional.  
 Default value: `"*"`
 You can add list of extensions, the application will filter and archive only these files.
-Don't add punctuation marks before extensions.
+Don't need to add punctuation marks before extensions.
 
 ### Archive type
 Optional.  
