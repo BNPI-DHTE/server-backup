@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 from os import mkdir, chdir, walk, path
 from glob import glob
@@ -8,8 +9,9 @@ def create_missing_folder(folder: str):
     try:
         if glob(folder).__len__() == 0:
             mkdir(folder)
+            logging.debug('Folder with name: ' + folder + ' created successfully.')
     except FileNotFoundError as fnf_error:
-        print('Unable to create directory: ' + folder + '\n' + str(fnf_error))
+        logging.critical('Unable to create directory: ' + folder + '\n' + str(fnf_error))
 
 
 class BackupCreator:
@@ -33,38 +35,46 @@ class BackupCreator:
     def make_tarfile(self):
         try:
             chdir(self.root_folder)
+            logging.debug('Current working folder is: ' + self.root_folder)
         except OSError as os_error:
-            print('Unable to open folder: ' + self.root_folder + '\n' + str(os_error))
+            logging.critical('Unable to open folder: ' + self.root_folder + '\n' + str(os_error))
         filename = path.join(self.root_folder, self.backup_folder, self.backup_type, self.generate_archive_filename())
         create_missing_folder(self.backup_folder)
         create_missing_folder(path.join(self.backup_folder, self.backup_type))
-        files = self.create_filtered_file_list()
+        files = self.create_file_list_to_archive()
+        logging.debug('Files to archive:\n' + str(files))
+        logging.info('Number of files to archive: ' + str(files.__len__()))
         try:
             chdir(path.join(self.root_folder, self.data_relative_path))
+            logging.debug('Current working folder is: ' + str(path.join(self.root_folder, self.data_relative_path)))
         except OSError as os_error:
-            print('Unable to open folder: '
-                  + path.join(self.root_folder, self.data_relative_path) + '\n' + str(os_error))
+            logging.critical('Unable to open folder: '
+                             + path.join(self.root_folder, self.data_relative_path) + '\n' + str(os_error))
         self.write_tarfile(filename, files)
+        logging.info('Archive saved successfully: ' + filename)
 
     def write_tarfile(self, filename: str, files: [str]):
         try:
             with tarfile.open(filename, 'w:' + self.archive_type) as tar:
                 for file in files:
+                    logging.debug('Add file ' + str(file) + ' to archive ' + str(filename))
                     tar.add(file)
         except OSError as os_error:
-            print('Unable to use tarfile: ' + filename + '\n' + str(os_error))
+            logging.critical('Unable to use tarfile: ' + filename + '\n' + str(os_error))
         except tarfile.TarError as tar_error:
-            print('Unable to compress files to tarfile: ' + filename + '\n' + str(tar_error))
+            logging.critical('Unable to compress files to tarfile: ' + filename + '\n' + str(tar_error))
 
     def generate_archive_filename(self):
         current_time = datetime.now()
-        date = current_time.strftime('%Y_%m_%d-%H_%M_%S')
-        return self.backup_type + '_' + date + '.tar.' + self.archive_type
+        date = current_time.strftime('%Y_%m_%d_%H_%M_%S')
+        return self.backup_type + '_backup_' + date + '.tar.' + self.archive_type
 
-    def create_filtered_file_list(self):
+    def create_file_list_to_archive(self):
         contents = self.create_list_of_all_files()
         if not self.extensions.__contains__('*'):
+            logging.debug('Filtering files with extensions: ' + str(self.extensions))
             return self.filter_file_list(contents)
+        logging.debug('Does not has an effective extension filter, archive all files in data folder.')
         return contents
 
     def create_list_of_all_files(self):
@@ -79,7 +89,8 @@ class BackupCreator:
                     else:
                         contents.append(file)
         except OSError as os_error:
-            print('Unable to read folder: ' + data_folder + '\n' + str(os_error))
+            logging.critical('Unable to read folder: ' + data_folder + '\n' + str(os_error))
+        logging.debug('All files in data folder: ' + str(contents))
         return contents
 
     def filter_file_list(self, contents):
@@ -88,4 +99,5 @@ class BackupCreator:
             for content in contents:
                 if content.endswith(extension):
                     filtered_content.append(content)
+        logging.debug('Filtered file list: ' + str(filtered_content))
         return filtered_content

@@ -10,8 +10,17 @@ The name of the json file can be added as a command-line argument. The configura
 detailed below.
 
 To run the application, move to the application folder, enter the
-`python3 backup.py settings.json` or `python3 backup.py settings.json`command in terminal.
-In this case, the settings.json file will be in the application's folder.
+`python3 main.py settings.json` or `python main.py settings.json`command in terminal, 
+depending on your python installation and/or operating system. In this case, the settings.json
+file will be in the application's folder.
+
+## Features
+
+- configuration via json
+- can work with multiple configurations
+- filter files by extensions
+- gzip, bzip2 or lzma output
+- logging to file
 
 ## Configuration file
 
@@ -20,13 +29,13 @@ json list items to the json file. For example:
 
     [
       {
-        "backup_type": "data"
-        "root_folder": "/home/data/fieldwork"
-        "data_folder": "field/databases/"
-        "backup_folder": "backup/"
-        "extension": [
+        "backup_type": "data",
+        "root_folder": "/home/data/fieldwork",
+        "data_folder": "field/databases/",
+        "backup_folder": "backup/",
+        "extensions": [
           "gpkg",
-          "gokg-wal",
+          "gpkg-wal",
           "gpkg-shm"
         ],
         "archive_type": "gz"

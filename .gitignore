@@ -1,5 +1,6 @@
 # Settings file for local develeopment
 backup_settings.json
+backup_log.log
 
 # PyCharm
 .idea

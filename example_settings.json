@@ -1,12 +1,12 @@
 [
   {
-    "backup_type": "data"
-    "root_folder": "/home/data/fieldwork"
-    "data_folder": "field/databases/"
-    "backup_folder": "backup/"
-    "extension": [
+    "backup_type": "data",
+    "root_folder": "/home/data/fieldwork",
+    "data_folder": "field/databases/",
+    "backup_folder": "backup/",
+    "extensions": [
       "gpkg",
-      "gokg-wal",
+      "gpkg-wal",
       "gpkg-shm"
     ],
     "archive_type": "gz"
