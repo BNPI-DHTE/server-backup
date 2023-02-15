@@ -1,8 +1,9 @@
 import logging
+import sys
+
+from ArchiveTypes import ArchiveTypes
 from BackupCreator import BackupCreator
 from SettingsReader import SettingsReader
-import sys
-from ArchiveTypes import ArchiveTypes
 
 
 # TODO: Tests

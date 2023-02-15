@@ -1,8 +1,8 @@
 import logging
-from datetime import datetime
-from os import mkdir, chdir, walk, path
-from glob import glob
 import tarfile
+from datetime import datetime
+from glob import glob
+from os import mkdir, chdir, walk, path
 
 
 def create_missing_folder(folder: str):
