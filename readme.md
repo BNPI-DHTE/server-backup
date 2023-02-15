@@ -10,8 +10,17 @@ The name of the json file can be added as a command-line argument. The configura
 detailed below.
 
 To run the application, move to the application folder, enter the
-`python3 backup.py settings.json` or `python3 backup.py settings.json`command in terminal.
-In this case, the settings.json file will be in the application's folder.
+`python3 main.py settings.json` or `python main.py settings.json`command in terminal, 
+depending on your python installation and/or operating system. In this case, the settings.json
+file must be in the application's folder.
+
+## Features
+
+- configuration via json
+- can work with multiple configurations
+- filter files by extensions
+- gzip, bzip2 or lzma output
+- logging to file
 
 ## Configuration file
 
@@ -20,13 +29,13 @@ json list items to the json file. For example:
 
     [
       {
-        "backup_type": "data"
-        "root_folder": "/home/data/fieldwork"
-        "data_folder": "field/databases/"
-        "backup_folder": "backup/"
-        "extension": [
+        "backup_type": "data",
+        "root_folder": "/home/data/fieldwork",
+        "data_folder": "field/databases/",
+        "backup_folder": "backup/",
+        "extensions": [
           "gpkg",
-          "gokg-wal",
+          "gpkg-wal",
           "gpkg-shm"
         ],
         "archive_type": "gz"
@@ -93,4 +102,14 @@ Optional.
 Default value: `"bz2"`
 This option will set the archive format.
 There are three values you can use in this field: gz (gzip compression), xz (lzma
-compression), bz2 (bzip2 compression). 
+compression), bz2 (bzip2 compression).
+
+## Logging
+
+The application logs into a file inside the application folder.
+No independent logging configuration implemented.If you want to change logging configuration,
+you have to edit the main function inside main.py. In this case, it is recommended to have a 
+clear knowledge of python logging, or I suggest you to read the python logging documentations.
+
+There can be found four logging levels in the application: debug, info, warning and critical.
+No error level, because all the errors are critical. 
