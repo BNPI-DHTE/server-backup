@@ -9,15 +9,30 @@ folder and its subfolders. In a json file, you can add some options to the appli
 The name of the json file can be added as a command-line argument. The configuration file
 detailed below.
 
+## Installing and running
+
+You can clone the git repository, if you have access rights.
+You have to have a Python interpreter and pip installed on the computer.
+
 To run the application, move to the application folder, enter the
 `python3 main.py settings.json` or `python main.py settings.json`command in terminal, 
 depending on your python installation and/or operating system. In this case, the settings.json
 file must be in the application's folder.
 
+### Dependencies
+
+The python dependencies need only for running tests. To install dependencies run the following
+command:  
+`pip install -r requirements.txt`
+
+### Run the tests
+
+You can run the tests with the following command: `python3 -m pytest` or `python -m pytest`
+
 ## Features
 
 - configuration via json
-- can work with multiple configurations
+- can work with multiple configurations 
 - filter files by extensions
 - gzip, bzip2 or lzma output
 - logging to file
