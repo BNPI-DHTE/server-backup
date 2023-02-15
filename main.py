@@ -36,11 +36,11 @@ def do_backup(dict_of_settings: dict):
             print('Backup type \'' + str(settings['backup_type']) + '\' finished.')
         except IndexError as index_error:
             logging.critical('Necessary option missing from configuration file!\n' + str(index_error))
+            sys.exit(index_error)
             # A validation of configuration file should be useful.
 
 
 def define_configuration():
-    list_of_settings = ()
     try:
         settings_reader = SettingsReader(sys.argv[1])
         logging.debug('Configuration file ' + sys.argv[1] + ' from CLI argument read successfully.')
@@ -48,6 +48,7 @@ def define_configuration():
     except IndexError as index_error:
         logging.critical('You have to enter a configuration json file as argument in command line! '
                          'Read the documentation for more info!\n' + str(index_error))
+        sys.exit(index_error)
     return list_of_settings
 
 

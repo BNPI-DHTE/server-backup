@@ -1,4 +1,5 @@
 import logging
+import sys
 import tarfile
 from datetime import datetime
 from glob import glob
@@ -12,6 +13,7 @@ def create_missing_folder(folder: str):
             logging.warning('No backup folder with name: ' + folder + '! It has been created successfully.')
     except FileNotFoundError as fnf_error:
         logging.critical('Unable to create missing backup directory: ' + folder + '\n' + str(fnf_error))
+        sys.exit(fnf_error)
 
 
 class BackupCreator:
@@ -38,6 +40,7 @@ class BackupCreator:
             logging.debug('Current working folder is: ' + self.root_folder)
         except OSError as os_error:
             logging.critical('Unable to open folder: ' + self.root_folder + '\n' + str(os_error))
+            sys.exit(os_error)
         filename = path.join(self.root_folder, self.backup_folder, self.backup_type, self.generate_archive_filename())
         create_missing_folder(self.backup_folder)
         create_missing_folder(path.join(self.backup_folder, self.backup_type))
@@ -50,6 +53,7 @@ class BackupCreator:
         except OSError as os_error:
             logging.critical('Unable to open folder: '
                              + path.join(self.root_folder, self.data_relative_path) + '\n' + str(os_error))
+            sys.exit(os_error)
         self.write_tarfile(filename, files)
         logging.info('Archive saved successfully: ' + filename)
 
@@ -61,8 +65,10 @@ class BackupCreator:
                     tar.add(file)
         except OSError as os_error:
             logging.critical('Unable to use tarfile: ' + filename + '\n' + str(os_error))
+            sys.exit(os_error)
         except tarfile.TarError as tar_error:
             logging.critical('Unable to compress files to tarfile: ' + filename + '\n' + str(tar_error))
+            sys.exit(tar_error)
 
     def generate_archive_filename(self):
         current_time = datetime.now()
@@ -90,6 +96,7 @@ class BackupCreator:
                         contents.append(file)
         except OSError as os_error:
             logging.critical('Unable to read folder: ' + data_folder + '\n' + str(os_error))
+            sys.exit(os_error)
         logging.debug('All files in data folder: ' + str(contents))
         return contents
 
