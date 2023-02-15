@@ -55,7 +55,7 @@ def is_valid_archive_type(type_string: str):
     archive_types = [member.value for member in ArchiveTypes]
     if archive_types.__contains__(type_string):
         return True
-    logging.warning('Invalid archive type: ' + type_string + '.\nThe default value ("bz2") will be used!')
+    logging.warning('Invalid archive type: ' + type_string + '. The default value ("bz2") will be used!')
     return False
 
 

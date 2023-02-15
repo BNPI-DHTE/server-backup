@@ -9,9 +9,9 @@ def create_missing_folder(folder: str):
     try:
         if glob(folder).__len__() == 0:
             mkdir(folder)
-            logging.debug('Folder with name: ' + folder + ' created successfully.')
+            logging.warning('No backup folder with name: ' + folder + '! It has been created successfully.')
     except FileNotFoundError as fnf_error:
-        logging.critical('Unable to create directory: ' + folder + '\n' + str(fnf_error))
+        logging.critical('Unable to create missing backup directory: ' + folder + '\n' + str(fnf_error))
 
 
 class BackupCreator:
