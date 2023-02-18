@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from SettingsReader import SettingsReader
+from src.SettingsReader import SettingsReader
 
 path = os.path.dirname(__file__)
 

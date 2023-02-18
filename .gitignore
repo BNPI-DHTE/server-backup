@@ -4,3 +4,6 @@ backup_log.log
 
 # PyCharm
 .idea
+
+# pytest
+.pytest_cache

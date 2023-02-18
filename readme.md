@@ -99,7 +99,7 @@ data and the backup folder.
 Necessary.  
 No default value.  
 The data folder relative to the root folder, you want to back up. This contains the files
-to save.
+to save. The root folder could also be used as data folder.
 
 ### Backup folder
 Necessary.  
