@@ -16,7 +16,7 @@ def create_missing_folder(folder: str):
         sys.exit(fnf_error)
 
 
-class BackupCreator:  # TODO: Make private the helper methods
+class BackupCreator:
 
     def __init__(self,
                  backup_type: str,
@@ -34,7 +34,22 @@ class BackupCreator:  # TODO: Make private the helper methods
         self.extensions = extensions
         self.archive_type = archive_type
 
-    def make_tarfile(self):  # TODO: Refactoring this method
+    def make_tarfile(self):
+        filename, files = self.init_archive_environment()
+        self.do_archive(filename, files)
+
+    def do_archive(self, filename, files):
+        try:
+            chdir(path.join(self.root_folder, self.data_relative_path))
+            logging.debug('Current working folder is: ' + str(path.join(self.root_folder, self.data_relative_path)))
+        except OSError as os_error:
+            logging.critical('Unable to open folder: '
+                             + path.join(self.root_folder, self.data_relative_path) + '\n' + str(os_error))
+            sys.exit(os_error)
+        self.write_tarfile(filename, files)
+        logging.info('Archive saved successfully: ' + filename)
+
+    def init_archive_environment(self):
         try:
             chdir(self.root_folder)
             logging.debug('Current working folder is: ' + self.root_folder)
@@ -47,15 +62,7 @@ class BackupCreator:  # TODO: Make private the helper methods
         files = self.create_file_list_to_archive()
         logging.debug('Files to archive:\n' + str(files))
         logging.info('Number of files to archive: ' + str(files.__len__()))
-        try:
-            chdir(path.join(self.root_folder, self.data_relative_path))
-            logging.debug('Current working folder is: ' + str(path.join(self.root_folder, self.data_relative_path)))
-        except OSError as os_error:
-            logging.critical('Unable to open folder: '
-                             + path.join(self.root_folder, self.data_relative_path) + '\n' + str(os_error))
-            sys.exit(os_error)
-        self.write_tarfile(filename, files)
-        logging.info('Archive saved successfully: ' + filename)
+        return filename, files
 
     def write_tarfile(self, filename: str, files: [str]):
         try:

@@ -6,8 +6,6 @@ from BackupCreator import BackupCreator
 from SettingsReader import SettingsReader
 
 
-# TODO: Tests
-# TODO: Docker image
 
 
 def main():
