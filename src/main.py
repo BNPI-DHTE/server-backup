@@ -6,8 +6,6 @@ from BackupCreator import BackupCreator
 from SettingsReader import SettingsReader
 
 
-
-
 def main():
     logging.basicConfig(format='%(asctime)s:(%(levelname)s) %(message)s',
                         filename='../backup_log.log',
