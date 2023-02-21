@@ -14,7 +14,7 @@ your machine. Somewhere inside this path you can add a data folder. This is, whe
 files are being. This path is relative to your root folder, and this will be the created
 archive's highest level. The third path is the backup folder, where you will find your
 created archive. This is also relative to the root folder. You can filter the files you want
-to save by an arrwy of extensions. 
+to save by an array of extensions. 
 
 ## Installing and running
 
