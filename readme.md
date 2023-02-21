@@ -9,6 +9,13 @@ folder and its subfolders. In a json file, you can add some options to the appli
 The name of the json file can be added as a command-line argument. The configuration file
 detailed below.
 
+The conception is quite simple. You can define a root folder, which is an absolute path on
+your machine. Somewhere inside this path you can add a data folder. This is, where your
+files are being. This path is relative to your root folder, and this will be the created
+archive's highest level. The third path is the backup folder, where you will find your
+created archive. This is also relative to the root folder. You can filter the files you want
+to save by an arrwy of extensions. 
+
 ## Installing and running
 
 You can clone the git repository, if you have access rights.
