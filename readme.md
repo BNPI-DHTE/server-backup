@@ -4,8 +4,8 @@ This archiver application designed for Bükk National Park Directorate field dat
 system. It can archive the collected data and other important files, for example
 QField/QGIS project files.
 
-The application can create an archive from files filtered by list of extensions in a given
-folder and its subfolders. In a json file, you can add some options to the application.
+The application can create an archive from files filtered by list of filters in a given
+folder recursively. In a json file, you can add some options to the application.
 The name of the json file can be added as a command-line argument. The configuration file
 detailed below.
 
@@ -14,7 +14,7 @@ your machine. Somewhere inside this path you can add a data folder. This is, whe
 files are being. This path is relative to your root folder, and this will be the created
 archive's highest level. The third path is the backup folder, where you will find your
 created archive. This is also relative to the root folder. You can filter the files you want
-to save by an array of extensions. 
+to save by an array of filter strings. 
 
 ## Installing and running
 
@@ -40,7 +40,7 @@ You can run the tests with the following command: `python3 -m pytest` or `python
 
 - configuration via json
 - can work with multiple configurations 
-- filter files by extensions
+- filter files by filter string
 - gzip, bzip2 or lzma output
 - logging to file
 
@@ -55,10 +55,10 @@ json list items to the json file. For example:
         "root_folder": "/home/data/fieldwork",
         "data_folder": "field/databases/",
         "backup_folder": "backup/",
-        "extensions": [
-          "gpkg",
-          "gpkg-wal",
-          "gpkg-shm"
+        "filters": [
+          ".gpkg",
+          ".gpkg-wal",
+          ".gpkg-shm"
         ],
         "archive_type": "gz"
       },
@@ -67,11 +67,11 @@ json list items to the json file. For example:
         "root_folder": "/home/data/fieldwork",
         "data_folder": "field/projectfiles/",
         "backup_folder": "backup/",
-        "extensions": [
-          "qgs",
-          "qgz",
-          "zip",
-          "db"
+        "filters": [
+          ".qgs",
+          ".qgz",
+          ".zip",
+          ".db"
         ],
         "archive_type": "bz2"
       }
@@ -113,11 +113,12 @@ Necessary.
 No default value.  
 The folder where you will save archives. Relative path to the root folder.
 
-### Extension
+### Filters
 Optional.  
 Default value: `"*"`
-You can add list of extensions, the application will filter and archive only these files.
-Don't need to add punctuation marks before extensions.
+You can add list of filter strings, the application will add all files contains any of the strings
+listed to the archive. 
+If you want to add extensions as filters you have to start the strings with punctuation marks.
 
 ### Archive type
 Optional.  

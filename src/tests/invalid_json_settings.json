@@ -4,7 +4,7 @@
     "root_folder": "/Users/aferenc/Documents/delheves/terep",
     "data_folder": "terep/adatok/",
     "backup_folder": "backup/",
-    "extensions": {
+    "filters": {
       "gpkg",
       "gpkg-wal",
       "gpkg-shm"

@@ -16,6 +16,18 @@ def create_missing_folder(folder: str):
         sys.exit(fnf_error)
 
 
+def file_is_not_in_list(filename: str, filelist: [str]):
+    list_to_check = []
+    for file in filelist:
+        print('File: ' + file)
+        list_to_check.append(file.lower())
+    if filename.lower() in list_to_check:
+        print(filename + ' is in the list!')
+        return False
+    print(filename + ' is not in the list!')
+    return True
+
+
 class BackupCreator:
 
     def __init__(self,
@@ -23,15 +35,15 @@ class BackupCreator:
                  root_folder: str,
                  data_relative_path: str,
                  backup_folder: str,
-                 extensions=None,
+                 filters=None,
                  archive_type='bz2'):
-        if extensions is None:
-            extensions = ['*']
+        if filters is None:
+            filters = ['*']
         self.backup_type = backup_type
         self.root_folder = root_folder
         self.data_relative_path = data_relative_path
         self.backup_folder = backup_folder
-        self.extensions = extensions
+        self.filters = filters
         self.archive_type = archive_type
 
     def make_tarfile(self):
@@ -83,10 +95,10 @@ class BackupCreator:
 
     def create_file_list_to_archive(self):
         contents = self.create_list_of_all_files()
-        if not self.extensions.__contains__('*'):
-            logging.debug('Filtering files with extensions: ' + str(self.extensions))
+        if not self.filters.__contains__('*'):
+            logging.debug('Filtering files with filter strings: ' + str(self.filters))
             return self.filter_file_list(contents)
-        logging.debug('Does not has an effective extension filter, archive all files in data folder.')
+        logging.debug('Does not have an effective filter string, archive all files in data folder.')
         return contents
 
     def create_list_of_all_files(self):
@@ -112,11 +124,12 @@ class BackupCreator:
             sys.exit(empty_data_folder_message)
         return contents
 
-    def filter_file_list(self, contents):
+    def filter_file_list(self, contents: [str]):
         filtered_content = []
-        for extension in self.extensions:
+        for filter_expression in self.filters:
             for content in contents:
-                if content.lower().endswith(extension.lower()):
-                    filtered_content.append(content)
+                if content.lower().__contains__(filter_expression.lower()):
+                    if file_is_not_in_list(content, filtered_content):
+                        filtered_content.append(content)
         logging.debug('Filtered file list: ' + str(filtered_content))
         return filtered_content

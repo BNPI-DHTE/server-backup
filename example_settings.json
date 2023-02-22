@@ -4,10 +4,10 @@
     "root_folder": "/home/data/fieldwork",
     "data_folder": "field/databases/",
     "backup_folder": "backup/",
-    "extensions": [
-      "gpkg",
-      "gpkg-wal",
-      "gpkg-shm"
+    "filters": [
+      ".gpkg",
+      ".gpkg-wal",
+      ".gpkg-shm"
     ],
     "archive_type": "gz"
   },
@@ -16,11 +16,11 @@
     "root_folder": "/home/data/fieldwork",
     "data_folder": "field/projectfiles/",
     "backup_folder": "backup/",
-    "extensions": [
-      "qgs",
-      "qgz",
-      "zip",
-      "db"
+    "filters": [
+      ".qgs",
+      ".qgz",
+      ".zip",
+      ".db"
     ],
     "archive_type": "bz2"
   }
