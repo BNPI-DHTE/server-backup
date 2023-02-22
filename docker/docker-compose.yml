@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  fieldwork-backup:
+    build:
+      context: ./../
+      dockerfile: ./docker/Dockerfile
+    image: ferencattila/fieldwork-backup
+    container_name: fieldwork_backup
+    restart: no
+    volumes:
+      - ./docker/docker_settings.json:/etc/app/fieldwork-backup/settings
+      - ./docker_resources/backup:/etc/app/data-backup/backup
+      - ./docker_resources/data:/etc/app/data-backup/data
+      - ./docker_resources/logs:/etc/app/data-backup/logs
+    entrypoint: ['python3 -m main.py settings/settings.json']

@@ -1,0 +1,27 @@
+[
+  {
+    "backup_type": "data",
+    "root_folder": "/src/fieldwork_backup/",
+    "data_folder": "data/adatok",
+    "backup_folder": "backup/",
+    "extensions": [
+      "gpkg",
+      "gpkg-wal",
+      "gpkg-shm"
+    ],
+    "archive_type": "xz"
+  },
+  {
+    "backup_type": "project",
+    "root_folder": "/src/fieldwork-backup/",
+    "data_folder": "data/project/",
+    "backup_folder": "backup/",
+    "extensions": [
+      "qgs",
+      "qgz",
+      "zip",
+      "db"
+    ],
+    "archive_type": "xz"
+  }
+]

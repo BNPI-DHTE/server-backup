@@ -1,0 +1,8 @@
+tests/
+.pytest_cache/
+
+*.log
+*.md
+*.json
+
+docker-compose.yml
