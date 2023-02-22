@@ -27,7 +27,7 @@ def do_backup(dict_of_settings: dict):
                                    settings['data_folder'],
                                    settings['backup_folder'],
                                    archive_type=set_archive_type(settings),
-                                   extensions=set_extensions(settings))
+                                   filters=set_filename_filters(settings))
             backup.make_tarfile()
             print('Backup type \'' + str(settings['backup_type']) + '\' finished.')
         except IndexError as index_error:
@@ -63,11 +63,11 @@ def set_archive_type(options: dict):
     return archive_type
 
 
-def set_extensions(options: dict):
-    extensions = ['*']
-    if 'extensions' in options:
-        extensions = options['extensions']
-    return extensions
+def set_filename_filters(options: dict):
+    filters = ['*']
+    if 'filters' in options:
+        filters = options['filters']
+    return filters
 
 
 if __name__ == '__main__':

@@ -4,10 +4,10 @@
     "root_folder": "/Users/aferenc/Documents/delheves/terep",
     "data_folder": "terep/adatok/",
     "backup_folder": "backup/",
-    "extensions": [
-      "gpkg",
-      "gpkg-wal",
-      "gpkg-shm"
+    "filters": [
+      ".gpkg",
+      ".gpkg-wal",
+      ".gpkg-shm"
     ],
     "archive_type": "xz"
   }

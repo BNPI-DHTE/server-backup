@@ -88,7 +88,7 @@ def test_filter_file_list(temp_folder):
                             root_folder,
                             root_folder,
                             'backup',
-                            ['gpkg', 'gpkg-wal', 'gpkg-shm'],
+                            ['.gpkg', '.gpkg-wal', '.gpkg-shm'],
                             'xz')
 
     all_files = creator.create_list_of_all_files()
