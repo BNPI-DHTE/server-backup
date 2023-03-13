@@ -5,7 +5,7 @@ from os import path
 import pytest
 from testfixtures import tempdir
 
-from src.BackupCreator import BackupCreator
+from src.core.BackupCreator import BackupCreator
 
 file_content = b'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer convallis lacinia diam, et finibus ' \
                b'metus laoreet ac. In bibendum dui et nibh dictum vestibulum. Nullam ac erat at tellus elementum ' \

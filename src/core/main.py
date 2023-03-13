@@ -8,7 +8,7 @@ from SettingsReader import SettingsReader
 
 def main():
     logging.basicConfig(format='%(asctime)s:(%(levelname)s) %(message)s',
-                        filename='../backup_log.log',
+                        filename='../../backup_log.log',
                         encoding='utf-8',
                         level=logging.INFO)
     logging.debug("Starting backup.")

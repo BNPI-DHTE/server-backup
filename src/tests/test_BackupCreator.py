@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 
-from src.BackupCreator import BackupCreator
+from src.core.BackupCreator import BackupCreator
 
 path = os.path.dirname(__file__)
 
