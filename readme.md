@@ -28,8 +28,14 @@ file must be in the application's folder.
 
 ### Dependencies
 
-The python dependencies need only for running tests. To install dependencies run the following
-command:  
+#### Python version
+
+Developed and tested under Python 3.11, may run with older python3 versions.
+
+#### Requirements
+
+The python dependencies need only for running tests, it's unnecessary and isn't recommended in production. To install
+dependencies run the following command:
 `pip install -r requirements.txt`
 
 ### Run the tests

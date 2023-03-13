@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from src.SettingsReader import SettingsReader
+from src.core.SettingsReader import SettingsReader
 
 path = os.path.dirname(__file__)
 
@@ -15,12 +15,12 @@ def test_read_settings():
 
 
 def test_wrong_json_causes_system_exit():
-    reader = SettingsReader(os.path.join(path, 'invalid_json_settings.json'))
+    reader = SettingsReader(os.path.join(path, 'fixtures/invalid_json_settings.json'))
     with pytest.raises(SystemExit) as system_exit:
         reader.read_settings()
     assert system_exit.type == SystemExit
     assert str(system_exit.value) == \
-           ('Invalid json string in configuration file: ' + os.path.join(path, 'invalid_json_settings.json')
+           ('Invalid json string in configuration file: ' + os.path.join(path, 'fixtures/invalid_json_settings.json')
             + '\nExpecting \',\' delimiter: line 4 column 5 (char 36)')
 
 
