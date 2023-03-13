@@ -19,12 +19,9 @@ def create_missing_folder(folder: str):
 def file_is_not_in_list(filename: str, filelist: [str]):
     list_to_check = []
     for file in filelist:
-        print('File: ' + file)
         list_to_check.append(file.lower())
     if filename.lower() in list_to_check:
-        print(filename + ' is in the list!')
         return False
-    print(filename + ' is not in the list!')
     return True
 
 
