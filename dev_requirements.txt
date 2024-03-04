@@ -1,2 +1,2 @@
 pytest==7.4.3
-testfixtures==7.2.2
+testfixtures==8.1.0
